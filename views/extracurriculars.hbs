@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CUMS</title>
+        <link type="text/css" rel="stylesheet" href="./css/output.css">
+        <link rel="shortcut icon" type="image/jpg" href="https://i.pinimg.com/originals/f4/aa/bb/f4aabb8d15736c9bc7003be9bbfd6362.jpg"/>
+    </head>
+    <body class="">
+        {{> header}}
+        <h1 class="text-center text-4xl indent-8 py-5 underline font-bold decoration-sky-500">Extracurriculars</h1>
+        <form class="flex flex-col justify-center items-center text-2xl pl-8 mr-5" id="frm1">
+            <div>Input Activity:<input class="ml-5 mr-5 text-2xl border border-black px-1" type="text" id="input1" name="fname">
+            Hours/Week:<input class="ml-5 text-2xl border border-black px-1" type="number" id="input2" name="fname"></div>
+            <div class="mt-5">Short Description:<textarea class="resize w-full mr-5 text-xl border border-black px-1" rows="5" type="text" id="input3" name="fname"></textarea></div><br>
+            <div><input class="ml-5 border border-black rounded-lg text-2xl px-1" type="button" onclick="myFunction()" value="Submit"></div><br>
+            <br>
+        </form>
+        <ul class="list-none text-2xl w-1/2 flex flex-col items-left text-right list-inside indent-16" id="curList">
+            <li class="">Marching Band<br>
+                <p>Hours/Week = 3<br>
+                This is the Marching Band!</p><button class="hover:font-bold close text-right text-2xl text-red-500">Remove</button></li>
+            <li class="">CSC<br>
+                <p>Hours/Week = 1<br>
+                I love computer security!</p><button class="hover:font-bold close text-2xl text-red-500">Remove</button></li>
+            <li class="">Chess Team<br>
+                <p>Hours/Week = 6<br>
+                Google en passant! Holy hell!</p><button class="hover:font-bold close text-2xl text-red-500">Remove</button></li>
+            <li class="h">Varsity Football Captain<br>
+                <p>Hours/Week = 6<br>
+                I play sportsball! Being a captain sure is fun!</p><button class="hover:font-bold close text-2xl text-red-500">Remove</button></li>
+        </ul>
+    </body>
+    <script>
+
+
+        function myFunction() {
+
+            const totalDIV = document.createElement("div")
+            totalDIV.className = "animate-[pulse_1s]"
+
+            const divContainer = document.createElement("li")
+            divContainer.innerHTML = document.getElementById("input1").value;
+            divContainer.className = "text-2xl"
+            document.getElementById("input1").value = ""
+
+            const hoursWeek = document.createElement("p")
+            hoursWeek.innerHTML = "Hours/Week = " + document.getElementById("input2").value + "<br>" + document.getElementById("input3").value;
+            hoursWeek.className = "text-2xl"
+            document.getElementById("input2").value = ""
+            document.getElementById("input3").value = ""
+
+
+            divContainer.appendChild(hoursWeek)
+
+            const spanX = document.createElement("button")
+            spanX.className = "hover:font-bold close text-2xl text-red-500"
+            spanX.innerHTML = "Remove"
+
+            divContainer.appendChild(spanX)
+            totalDIV.append(divContainer)
+
+            document.getElementById("curList").appendChild(totalDIV)
+
+            window.scrollTo({left:0,top:document.body.scrollHeight, behavior:'smooth'});
+
+            assignHides();
+        }
+
+        /*function hideParent() {
+            this.parentElement.style.display = 'none';
+            console.log("CLICK!");
+        }*/
+
+        function assignHides()  {
+            var closebtns = document.getElementsByClassName("close");
+            var i;
+
+            // Loop through the elements, and hide the parent, when clicked on
+            for (i = 0; i < closebtns.length; i++) {
+            closebtns[i].addEventListener("click", function() {
+                this.parentElement.style.display = 'none';
+            });
+            }bal
+        }
+
+        assignHides();
+    </script>
+</html>

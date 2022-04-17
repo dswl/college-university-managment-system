@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CUMS</title>
+        <link type="text/css" rel="stylesheet" href="./css/output.css">
+        <link rel="shortcut icon" type="image/jpg" href="https://i.pinimg.com/originals/f4/aa/bb/f4aabb8d15736c9bc7003be9bbfd6362.jpg"/>
+    </head>
+    <body class="">
+        <div class="w-full flex flex-col justify-center items-center">
+            {{> header}}
+            <div class="w-full flex mt-4 flex-col justify-center items-center">
+                <div class="w-full flex flex-col px-2 justify-center items-center font-bold text-2xl mb-1">
+                    Your Stats
+                </div>
+
+                <div class="w-full flex flex-col px-2 justify-center items-center mb-4">
+                    <b>SAT Score: 666<br></b>
+                    SAT Score (Math): 690<br>
+                    SAT Score (English): -24<br>
+                    <br>
+                    <b>ACT Score: N/A<br></b>
+                    ACT Score (Math): N/A<br>
+                    ACT Score (English): N/A<br>
+                    <br>
+                    <b>GPA (Weighted): 4.2069<br></b>
+                    <b>GPA (Unweighted): 3.1415<br></b>
+                </div>
+
+                <div class="w-full lg:w-1/2 flex flex-col items-center px-2">
+                    <div class="w-full text-center font-bold text-xl">
+                        Common App Essays
+                    </div>
+                    <div class="w-full flex-col">
+                        <div class="w-full text-sm text-green-600 text-center cursor-pointer" onclick="add_essay()">
+                            Add an essay prompt
+                        </div>
+                        <div class="hidden mt-2" id="add_essay_div">
+                            <textarea class="w-full border border-black p-1" id="add_essay_prompt" rows="2"></textarea>
+                            <div class="flex justify-end">
+                                <div class="px-1 font-semibold cursor-pointer text-red-500" onclick="cancel_add()">
+                                    Cancel
+                                </div>
+                                <div class="px-1 font-semibold cursor-pointer text-green-500" onclick="finish_add()">
+                                    Submit
+                                </div>
+                            </div>
+                        </div>
+                        <div id="essay_prompts">
+                            <div class="mt-2" id="essay_0">
+                                <div class="font-bold">
+                                    Recount a time when you faced a challenge, setback, or failure. How did it affect you, and what did you learn from the experience?
+                                </div>
+                                <div>
+                                    <textarea class="w-full border border-black p-1" rows="15" id="essay_text_0" oninput="update_word_count(0)"></textarea>
+                                    <div class="w-full flex flex-row">
+                                        <div class="w-1/2" id="word_count_0">
+                                            Word Count: 0 words
+                                        </div>
+                                        <div class="w-1/2 text-red-500 text-right cursor-pointer" onclick="remove_essay(0)">
+                                            Remove
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const essay_id = new Set()
+        function add_essay() {
+            document.getElementById("add_essay_div").classList.remove("hidden")
+        }
+        function cancel_add() {
+            document.getElementById("add_essay_div").classList.add("hidden")
+            document.getElementById("add_essay_prompt").value = ""
+        }
+        function finish_add() {
+            let new_id = Math.floor(Math.random() * 100)
+            while (essay_id.has(new_id)) {
+                new_id = Math.floor(Math.random() * 100)
+            }
+
+            const divContainer = document.createElement("div")
+            divContainer.id = `essay_${new_id}`
+            divContainer.classList.add("mt-2")
+
+            const promptDiv = document.createElement("div")
+            promptDiv.classList.add("font-bold")
+            promptDiv.innerHTML = document.getElementById("add_essay_prompt").value
+
+            const essayDiv = document.createElement("div")
+            const essayTextarea = document.createElement("textarea")
+            essayTextarea.classList.add("w-full", "border", "border-black", "p-1")
+            essayTextarea.rows = 15
+            essayTextarea.id = `essay_text_${new_id}`
+            essayTextarea.setAttribute('oninput', `update_word_count(${new_id})`)
+
+            const counterDiv = document.createElement("div")
+            counterDiv.classList.add("w-full", "flex", "flex-row")
+            const wordCount = document.createElement("div")
+            wordCount.classList.add("w-1/2")
+            wordCount.id = `word_count_${new_id}`
+            wordCount.innerHTML = "Word Count: 0 words"
+            const removeEssayDiv = document.createElement("div")
+            removeEssayDiv.classList.add("w-1/2", "text-red-500", "text-right", "cursor-pointer")
+            removeEssayDiv.innerHTML = "Remove"
+            removeEssayDiv.setAttribute('onclick', `remove_essay(${new_id})`)
+
+            counterDiv.appendChild(wordCount)
+            counterDiv.appendChild(removeEssayDiv)
+
+            essayDiv.appendChild(essayTextarea)
+            essayDiv.appendChild(counterDiv)
+
+            divContainer.appendChild(promptDiv)
+            divContainer.appendChild(essayDiv)
+
+            document.getElementById("essay_prompts").appendChild(divContainer)
+            essay_id.add(new_id)
+
+            cancel_add()
+        }
+        function remove_essay(id) {
+            essay_id.delete(id)
+            document.getElementById(`essay_prompts`).removeChild(document.getElementById(`essay_${id}`))
+        }
+        function update_word_count(id) {
+            const words = document.getElementById(`essay_text_${id}`).value.split(' ').length
+            if (document.getElementById(`essay_text_${id}`).value === "" || document.getElementById(`essay_text_${id}`).value.charAt(document.getElementById(`essay_text_${id}`).value.length-1) == " ") {
+                document.getElementById(`word_count_${id}`).innerHTML = `Word Count: ${words-1} words`
+            }
+            else {
+                document.getElementById(`word_count_${id}`).innerHTML = `Word Count: ${words} words`
+            }
+        }
+    </script>
+</html>

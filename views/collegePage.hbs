@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CUMS</title>
+        <link type="text/css" rel="stylesheet" href="./css/output.css">
+        <link rel="shortcut icon" type="image/jpg" href="https://i.pinimg.com/originals/f4/aa/bb/f4aabb8d15736c9bc7003be9bbfd6362.jpg"/>
+    </head>
+    <body class="">
+        <div class="w-full flex flex-col justify-center items-center mb-2">
+            {{> header}}
+            <div class="flex flex-col items-center">
+                <p class="py-3 text-4xl underline font-bold decoration-sky-500">{{collegeInfo.name}}</p>
+                <p class="text-2xl">{{collegeInfo.city}}, {{collegeInfo.state}}</p>
+                <p>Acceptance Rate is {{collegeInfo.accRate}}%</p>
+                <p>Average Net Price is ${{collegeInfo.averageNetPrice}}</p>
+                <div class="flex flex-col items-center justify-center" style="width: 400px">
+                    <div class="w-full font-bold flex items-center text-lg justify-center mb-0.5">
+                        SAT Scores
+                    </div>
+                    <div class="font-bold flex items-center border border-black justify-center mb-0.5">
+                        <select id="sat_select" onchange="change_sat()">
+                            <option value="overall">Overall</option>
+                            <option value="math">Math</option>
+                            <option value="english">English</option>
+                        </select>
+                    </div>
+                    <div class="w-full" id="sat_overall_div">
+                        <div class="relative" style="height: 30px;">
+                            <div class="absolute w-full bg-gray-300 rounded-lg my-1.5" style="height: 20px;">
+
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none bg-red-300 my-1" style="height:23px;width:{{find_width (add collegeInfo.satScores.math.[0] (add collegeInfo.satScores.english.[0] -800)) (add collegeInfo.satScores.math.[2] (add collegeInfo.satScores.english.[2] -800)) 800}}%;left:{{start_left (add collegeInfo.satScores.math.[0] (add collegeInfo.satScores.english.[0] -800)) 800}}%">
+                            </div>
+                            {{!-- <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative text-3xl w-1/2 items-center justify-center" style="left:{{find_left (add collegeInfo.satScores.math.[1] (add collegeInfo.satScores.english.[1] -800)) 800}}%;top:-5px">
+                                    <div>|</div>
+                                </div>
+                            </div> --}}
+                        </div>
+                        <div class="w-full relative px-px text-center flex flex-col items-center justify-center select-none" id="sat_overall_score_div" style="height: 18px">
+                            {{!-- <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.satScores.math.[1] (add collegeInfo.satScores.english.[1] -800)) 800}}%" id="sat_overall_q2_container">
+                                    <div id="sat_overall_q2">{{add collegeInfo.satScores.math.[1] collegeInfo.satScores.english.[1]}}</div>
+                                    <div>Median</div>
+                                </div>
+                            </div> --}}
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.satScores.math.[0] (add collegeInfo.satScores.english.[0] -800)) 800}}%" id="sat_overall_q1_container">
+                                    <div id="sat_overall_q1">{{add collegeInfo.satScores.math.[0] collegeInfo.satScores.english.[0]}}</div>
+                                </div>
+                            </div>
+                             <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.satScores.math.[2] (add collegeInfo.satScores.english.[2] -800)) 800}}%" id="sat_overall_q3_container">
+                                    <div id="sat_overall_q3">{{add collegeInfo.satScores.math.[2] collegeInfo.satScores.english.[2]}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full" id="sat_math_div">
+                        <div class="relative" style="height: 30px;">
+                            <div class="absolute w-full bg-gray-300 rounded-lg my-1.5" style="height: 20px;">
+
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none bg-red-300 my-1" style="height:23px;width:{{find_width (add collegeInfo.satScores.math.[0] -400) (add collegeInfo.satScores.math.[2] -400) 400}}%;left:{{start_left (add collegeInfo.satScores.math.[0] -400) 400}}%">
+                            </div>
+                        </div>
+                        <div class="w-full relative px-px text-center flex flex-col items-center justify-center select-none" id="sat_math_score_div" style="height: 18px">
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.satScores.math.[0] -400) 400}}%" id="sat_math_q1_container">
+                                    <div id="sat_math_q1">{{collegeInfo.satScores.math.[0]}}</div>
+                                </div>
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.satScores.math.[2] -400) 400}}%" id="sat_math_q3_container">
+                                    <div id="sat_math_q3">{{collegeInfo.satScores.math.[2]}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full" id="sat_english_div">
+                        <div class="relative" style="height: 30px;">
+                            <div class="absolute w-full bg-gray-300 rounded-lg my-1.5" style="height: 20px;">
+
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none bg-red-300 my-1" style="height:23px;width:{{find_width (add collegeInfo.satScores.english.[0] -400) (add collegeInfo.satScores.english.[2] -400) 400}}%;left:{{start_left (add collegeInfo.satScores.english.[0] -400) 400}}%">
+                            </div>
+                        </div>
+                        <div class="w-full relative px-px text-center flex flex-col items-center justify-center select-none" id="sat_english_score_div" style="height: 18px">
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.satScores.english.[0] -400) 400}}%" id="sat_english_q1_container">
+                                    <div id="sat_english_q1">{{collegeInfo.satScores.english.[0]}}</div>
+                                </div>
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.satScores.english.[2] -400) 400}}%" id="sat_english_q3_container">
+                                    <div id="sat_english_q3">{{collegeInfo.satScores.english.[2]}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center justify-center" style="width: 400px">
+                    <div class="w-full font-bold flex items-center text-lg justify-center mb-0.5">
+                        ACT Scores
+                    </div>
+                    <div class="font-bold flex items-center border border-black justify-center mb-0.5">
+                        <select id="act_select" onchange="change_act()">
+                            <option value="overall">Overall</option>
+                            <option value="math">Math</option>
+                            <option value="english">English</option>
+                        </select>
+                    </div>
+                    <div class="w-full" id="act_overall_div">
+                        <div class="relative" style="height: 30px;">
+                            <div class="absolute w-full bg-gray-300 rounded-lg my-1.5" style="height: 20px;">
+
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none bg-red-300 my-1" style="height:23px;width:{{find_width (add (calc_act collegeInfo.actScores.math.[0] collegeInfo.actScores.english.[0]) -18) (add (calc_act collegeInfo.actScores.math.[2] collegeInfo.actScores.english.[2]) -18) 18}}%;left:{{start_left (add (calc_act collegeInfo.actScores.math.[0] collegeInfo.actScores.english.[0]) -18) 18}}%">
+                            </div>
+                        </div>
+                        <div class="w-full relative px-px text-center flex flex-col items-center justify-center select-none" id="act_overall_score_div" style="height: 18px">
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add (calc_act collegeInfo.actScores.math.[0] collegeInfo.actScores.english.[0]) -18) 18}}%" id="act_overall_q1_container">
+                                    <div id="act_overall_q1">{{calc_act collegeInfo.actScores.math.[0] collegeInfo.actScores.english.[0]}}</div>
+                                </div>
+                            </div>
+                             <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add (calc_act collegeInfo.actScores.math.[2] collegeInfo.actScores.english.[2]) -18) 18}}%" id="act_overall_q3_container">
+                                    <div id="act_overall_q3">{{calc_act collegeInfo.actScores.math.[2] collegeInfo.actScores.english.[2]}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full" id="act_math_div">
+                        <div class="relative" style="height: 30px;">
+                            <div class="absolute w-full bg-gray-300 rounded-lg my-1.5" style="height: 20px;">
+
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none bg-red-300 my-1" style="height:23px;width:{{find_width (add collegeInfo.actScores.math.[0] -18) (add collegeInfo.actScores.math.[2] -18) 18}}%;left:{{start_left (add collegeInfo.actScores.math.[0] -18) 18}}%">
+                            </div>
+                        </div>
+                        <div class="w-full relative px-px text-center flex flex-col items-center justify-center select-none" id="act_math_score_div" style="height: 18px">
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.actScores.math.[0] -18) 18}}%" id="act_math_q1_container">
+                                    <div id="act_math_q1">{{collegeInfo.actScores.math.[0]}}</div>
+                                </div>
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.actScores.math.[2] -18) 18}}%" id="act_math_q3_container">
+                                    <div id="act_math_q3">{{collegeInfo.actScores.math.[2]}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full" id="act_english_div">
+                        <div class="relative" style="height: 30px;">
+                            <div class="absolute w-full bg-gray-300 rounded-lg my-1.5" style="height: 20px;">
+
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none bg-red-300 my-1" style="height:23px;width:{{find_width (add collegeInfo.actScores.english.[0] -18) (add collegeInfo.actScores.english.[2] -18) 18}}%;left:{{start_left (add collegeInfo.actScores.english.[0] -18) 18}}%">
+                            </div>
+                        </div>
+                        <div class="w-full relative px-px text-center flex flex-col items-center justify-center select-none" id="act_english_score_div" style="height: 18px">
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.actScores.english.[0] -18) 18}}%" id="act_english_q1_container">
+                                    <div id="act_english_q1">{{collegeInfo.actScores.english.[0]}}</div>
+                                </div>
+                            </div>
+                            <div class="absolute w-full px-px text-center flex flex-col items-center justify-center select-none">
+                                <div class="relative flex flex-col w-full items-center justify-center text-xs" style="left:{{find_left (add collegeInfo.actScores.english.[2] -18) 18}}%" id="act_english_q3_container">
+                                    <div id="act_english_q3">{{collegeInfo.actScores.english.[2]}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full flex flex-col">
+                </div>
+                <a target="_blank" rel="noopener noreferrer" href="{{collegeInfo.schoolWebsite}}" class="text-blue-700">School Page</a>
+            </div>
+            <div class="w-full flex flex-row mt-4 justify-center items-center">
+                <div class="w-full lg:w-1/2 flex flex-col px-2">
+                    <div class="w-full text-center font-bold text-xl">
+                        Essays
+                    </div>
+                    <div class="w-full flex-col">
+                        <div class="w-full text-sm text-green-600 text-center cursor-pointer" onclick="add_essay()">
+                            Add an essay prompt
+                        </div>
+                        <div class="hidden mt-2" id="add_essay_div">
+                            <textarea class="w-full border border-black p-1" id="add_essay_prompt" rows="2"></textarea>
+                            <div class="flex justify-end">
+                                <div class="px-1 font-semibold cursor-pointer text-red-500" onclick="cancel_add()">
+                                    Cancel
+                                </div>
+                                <div class="px-1 font-semibold cursor-pointer text-green-500" onclick="finish_add()">
+                                    Submit
+                                </div>
+                            </div>
+                        </div>
+                        <div id="essay_prompts">
+                            <div class="mt-2" id="essay_0">
+                                <div class="font-bold">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?
+                                </div>
+                                <div>
+                                    <textarea class="w-full border border-black p-1" rows="10" id="essay_text_0" oninput="update_word_count(0)"></textarea>
+                                    <div class="w-full flex flex-row">
+                                        <div class="w-1/2" id="word_count_0">
+                                            Word Count: 0 words
+                                        </div>
+                                        <div class="w-1/2 text-red-500 text-right cursor-pointer" onclick="remove_essay(0)">
+                                            Remove
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        const sat_overall_width = document.getElementById("sat_overall_score_div").clientWidth
+        document.getElementById("sat_overall_q1_container").style.left = `${parseFloat(document.getElementById("sat_overall_q1_container").style.left.substring(0, document.getElementById("sat_overall_q1_container").style.left.length-1)) - document.getElementById("sat_overall_q1").clientWidth / sat_overall_width * 100 / 2}%`
+        document.getElementById("sat_overall_q3_container").style.left = `${parseFloat(document.getElementById("sat_overall_q3_container").style.left.substring(0, document.getElementById("sat_overall_q3_container").style.left.length-1)) + document.getElementById("sat_overall_q3").clientWidth / sat_overall_width * 100 / 2}%`
+        document.getElementById("sat_math_q1_container").style.left = `${parseFloat(document.getElementById("sat_math_q1_container").style.left.substring(0, document.getElementById("sat_math_q1_container").style.left.length-1)) - document.getElementById("sat_math_q1").clientWidth / sat_overall_width * 100 / 2}%`
+        document.getElementById("sat_math_q3_container").style.left = `${parseFloat(document.getElementById("sat_math_q3_container").style.left.substring(0, document.getElementById("sat_math_q3_container").style.left.length-1)) + document.getElementById("sat_math_q3").clientWidth / sat_overall_width * 100 / 2}%`
+        document.getElementById("sat_english_q1_container").style.left = `${parseFloat(document.getElementById("sat_english_q1_container").style.left.substring(0, document.getElementById("sat_english_q1_container").style.left.length-1)) - document.getElementById("sat_english_q1").clientWidth / sat_overall_width * 100 / 2}%`
+        document.getElementById("sat_english_q3_container").style.left = `${parseFloat(document.getElementById("sat_english_q3_container").style.left.substring(0, document.getElementById("sat_english_q3_container").style.left.length-1)) + document.getElementById("sat_english_q3").clientWidth / sat_overall_width * 100 / 2}%`
+
+        document.getElementById("sat_math_div").classList.add("hidden")
+        document.getElementById("sat_english_div").classList.add("hidden")
+
+        function change_sat() {
+            document.getElementById("sat_overall_div").classList.add("hidden")
+            document.getElementById("sat_math_div").classList.add("hidden")
+            document.getElementById("sat_english_div").classList.add("hidden")
+
+            document.getElementById(`sat_${document.getElementById("sat_select").value}_div`).classList.remove("hidden")
+        }
+
+        const act_overall_width = document.getElementById("act_overall_score_div").clientWidth
+        document.getElementById("act_overall_q1_container").style.left = `${parseFloat(document.getElementById("act_overall_q1_container").style.left.substring(0, document.getElementById("act_overall_q1_container").style.left.length-1)) - document.getElementById("act_overall_q1").clientWidth / act_overall_width * 100 / 2}%`
+        document.getElementById("act_overall_q3_container").style.left = `${parseFloat(document.getElementById("act_overall_q3_container").style.left.substring(0, document.getElementById("act_overall_q3_container").style.left.length-1)) + document.getElementById("act_overall_q3").clientWidth / act_overall_width * 100 / 2}%`
+        document.getElementById("act_math_q1_container").style.left = `${parseFloat(document.getElementById("act_math_q1_container").style.left.substring(0, document.getElementById("act_math_q1_container").style.left.length-1)) - document.getElementById("act_math_q1").clientWidth / act_overall_width * 100 / 2}%`
+        document.getElementById("act_math_q3_container").style.left = `${parseFloat(document.getElementById("act_math_q3_container").style.left.substring(0, document.getElementById("act_math_q3_container").style.left.length-1)) + document.getElementById("act_math_q3").clientWidth / act_overall_width * 100 / 2}%`
+        document.getElementById("act_english_q1_container").style.left = `${parseFloat(document.getElementById("act_english_q1_container").style.left.substring(0, document.getElementById("act_english_q1_container").style.left.length-1)) - document.getElementById("act_english_q1").clientWidth / act_overall_width * 100 / 2}%`
+        document.getElementById("act_english_q3_container").style.left = `${parseFloat(document.getElementById("act_english_q3_container").style.left.substring(0, document.getElementById("act_english_q3_container").style.left.length-1)) + document.getElementById("act_english_q3").clientWidth / act_overall_width * 100 / 2}%`
+
+        document.getElementById("act_math_div").classList.add("hidden")
+        document.getElementById("act_english_div").classList.add("hidden")
+
+        function change_act() {
+            document.getElementById("act_overall_div").classList.add("hidden")
+            document.getElementById("act_math_div").classList.add("hidden")
+            document.getElementById("act_english_div").classList.add("hidden")
+
+            document.getElementById(`act_${document.getElementById("act_select").value}_div`).classList.remove("hidden")
+        }
+
+        const essay_id = new Set()
+        function add_essay() {
+            document.getElementById("add_essay_div").classList.remove("hidden")
+        }
+        function cancel_add() {
+            document.getElementById("add_essay_div").classList.add("hidden")
+            document.getElementById("add_essay_prompt").value = ""
+        }
+        function finish_add() {
+            let new_id = Math.floor(Math.random() * 100)
+            while (essay_id.has(new_id)) {
+                new_id = Math.floor(Math.random() * 100)
+            }
+
+            const divContainer = document.createElement("div")
+            divContainer.id = `essay_${new_id}`
+            divContainer.classList.add("mt-2")
+
+            const promptDiv = document.createElement("div")
+            promptDiv.classList.add("font-bold")
+            promptDiv.innerHTML = document.getElementById("add_essay_prompt").value
+
+            const essayDiv = document.createElement("div")
+            const essayTextarea = document.createElement("textarea")
+            essayTextarea.classList.add("w-full", "border", "border-black", "p-1")
+            essayTextarea.rows = 10
+            essayTextarea.id = `essay_text_${new_id}`
+            essayTextarea.setAttribute('oninput', `update_word_count(${new_id})`)
+
+            const counterDiv = document.createElement("div")
+            counterDiv.classList.add("w-full", "flex", "flex-row")
+            const wordCount = document.createElement("div")
+            wordCount.classList.add("w-1/2")
+            wordCount.id = `word_count_${new_id}`
+            wordCount.innerHTML = "Word Count: 0 words"
+            const removeEssayDiv = document.createElement("div")
+            removeEssayDiv.classList.add("w-1/2", "text-red-500", "text-right", "cursor-pointer")
+            removeEssayDiv.innerHTML = "Remove"
+            removeEssayDiv.setAttribute('onclick', `remove_essay(${new_id})`)
+
+            counterDiv.appendChild(wordCount)
+            counterDiv.appendChild(removeEssayDiv)
+
+            essayDiv.appendChild(essayTextarea)
+            essayDiv.appendChild(counterDiv)
+
+            divContainer.appendChild(promptDiv)
+            divContainer.appendChild(essayDiv)
+
+            document.getElementById("essay_prompts").appendChild(divContainer)
+            essay_id.add(new_id)
+
+            cancel_add()
+        }
+        function remove_essay(id) {
+            essay_id.delete(id)
+            document.getElementById(`essay_prompts`).removeChild(document.getElementById(`essay_${id}`))
+        }
+        function update_word_count(id) {
+            const words = document.getElementById(`essay_text_${id}`).value.split(' ').length
+            if (document.getElementById(`essay_text_${id}`).value === "" || document.getElementById(`essay_text_${id}`).value.charAt(document.getElementById(`essay_text_${id}`).value.length-1) == " ") {
+                document.getElementById(`word_count_${id}`).innerHTML = `Word Count: ${words-1} words`
+            }
+            else {
+                document.getElementById(`word_count_${id}`).innerHTML = `Word Count: ${words} words`
+            }
+        }
+    </script>
+</html>
