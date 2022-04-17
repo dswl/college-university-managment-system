@@ -40,6 +40,16 @@ hbs.registerHelper('start_left', function(start, max) {
     return (start/max)*100
 })
 
+hbs.registerHelper('if_uva', function(name) {
+    if (name === "University of Virginia-Main Campus") return true
+    return false
+})
+
+hbs.registerHelper('if_cornell', function(name) {
+    if (name === "Cornell University") return true
+    return false
+})
+
 async function getTotalPages() {
     return new Promise(async function(resolve, reject) {
         https.get(`https://api.data.gov/ed/collegescorecard/v1/schools?fields=school.name&api_key=m4qEjprQZTAgkVmj2li2owsgmEHk4ZDmoSOtLkif`, (response) => {

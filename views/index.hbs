@@ -17,7 +17,7 @@
                 <h2 class="text-2xl underline">Calendar</h2>
                 <div class="object-scale-down pr-10">
                     <iframe
-                        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&src=aWhpdDJraWRzd2l0aG15Y2FyQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043"
+                        src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&src=Y3Vtc2NhbGVuZGFyQGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%2333B679&color=%230B8043"
                         style="border:solid 1px #777" width="100%" height="500" frameborder="0" scrolling="no"></iframe>
                 </div>
                 <div class="w-full flex flex-row p">
@@ -44,59 +44,69 @@
             </div>
             <div class="w-1/2 h-full flex flex-col">
                 <h1 class="text-3xl font-bold text-center">Colleges</h1>
-                <h2 class="text-xl underline">Not Responded</h2>
+                <h2 class="text-xl underline">In Progress</h2>
                 <div class="indent-8">
                     <h3 class="text-xl">Reaches</h3>
-                    <ul class="list-disc list-inside inline-block indent-16">
-                        <li class="hover:font-bold">Harvard</li>
-                        <li class="hover:font-bold">Cornell</li>
-                        <li class="hover:font-bold">Massachusetts Institute of Technology</li>
-                        <a href="dnu">
-                            <li class="hover:font-bold">Deez Nuts University</li>
+                    <ul class="list-disc list-inside inline-block indent-16 w-4/5">
+                        <a href="collegePage?name=Harvard%20University">
+                            <li class="hover:font-bold w-full">Harvard<span class="rounded-md bg-red-600 ml-40 px-2">NOT BEGUN</span></li>
+                        </a>
+                        <a href="collegePage?name=Cornell%20University">
+                            <li class="hover:font-bold">Cornell<span class="rounded-md bg-yellow-600 ml-40 px-2">IN PROGRESS</span></li>
                         </a>
                     </ul>
                     <h3 class="text-xl ">Targets</h3>
                     <ul class="list-disc list-inside inline-block indent-16">
                         <a href="collegePage?name=University%20of%20Virginia">
-                            <li class="hover:font-bold">University of Virginia</li>
+                            <li class="hover:font-bold">University of Virginia  <span class="rounded-md bg-orange-600 ml-16 px-2">PEER REVIEW</span></li>
                         </a>
+                        <li class="hover:font-bold">University of Maryland<span class="rounded-md bg-yellow-600 ml-14 px-2">IN PROGRESS</span></li>
+                    </ul>
+                    <h3 class="text-xl">Safeties</h3>
+                    <ul class="list-disc list-inside inline-block mb-10 indent-16">
+                        <li class="hover:font-bold">University of Pittsburgh<span class="rounded-md bg-green-600 ml-14 px-2">COMPLETE</span></li>
+                    </ul>
+                </div>
+                <h2 class="text-xl underline">Submitted</h2>
+                <div class="indent-8">
+                    <h3 class="text-xl">Reaches</h3>
+                    <ul class="list-disc list-inside inline-block indent-16">
+                        <li class="hover:font-bold">Massachusetts Institute of Technology</li>
+                    </ul>
+                    <h3 class="text-xl ">Targets</h3>
+                    <ul class="list-disc list-inside inline-block indent-16">
                         <li class="hover:font-bold">Virginia Tech
                         </li>
-                        <li class="hover:font-bold">University of Maryland</li>
                     </ul>
                     <h3 class="text-xl">Safeties</h3>
                     <ul class="list-disc list-inside inline-block mb-10 indent-16">
                         <li class="hover:font-bold">George Mason University</li>
                         <li class="hover:font-bold">Gannon University</li>
-                        <li class="hover:font-bold">University of Pittsburgh</li>
                     </ul>
                 </div>
-
                 <h2 class="text-xl underline">Responded</h2>
                 <div class="indent-8">
                     <h3 class="text-xl">Accepted</h3>
                     <ul class="list-disc list-inside indent-16">
-                        <li>Stanford</li>
-                        <li>UCLA</li>
-                        <li>William and Mary</li>
+                        <li class="hover:font-bold">Stanford</li>
+                        <a href="dnu">
+                            <li class="hover:font-bold">DNU</li>
+                        </a>
                     </ul>
                     <h3 class="text-xl">Denied</h3>
                     <ul class="list-disc list-inside indent-16">
-                        <li>Yale</li>
-                        <li>Princeton</li>
-                        <li>UC Hicago</li>
+                        <li class="hover:font-bold">Yale</li>
+                        <li class="hover:font-bold">UC Hicago</li>
                     </ul>
                     <h3 class="text-xl">Waitlisted</h3>
                     <ul class="list-disc list-inside indent-16">
-                        <li>UC Berkeley</li>
-                        <li>University of Michigan</li>
-                        <li>Duke</li>
+                        <li class="hover:font-bold">UC Berkeley</li>
+                        <li class="hover:font-bold">University of Michigan</li>
                     </ul>
                     <h3 class="text-xl">Deferred</h3>
                     <ul class="list-disc list-inside indent-16">
-                        <li>University of Pennsylvania</li>
-                        <li>Columbia/li>
-                        <li>Rice</li>
+                        <li class="hover:font-bold">Columbia</li>
+                        <li class="hover:font-bold">Rice</li>
                     </ul>
                 </div>
             </div>

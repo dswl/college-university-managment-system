@@ -201,10 +201,11 @@
                         <div id="essay_prompts">
                             <div class="mt-2" id="essay_0">
                                 <div class="font-bold">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?
+                                    {{#if (if_uva collegeInfo.name)}}What's your favorite word and why?{{/if}}
+                                    {{#if (if_cornell collegeInfo.name)}}Engineering is inherently collaborative. What does collaboration mean to you? What strengths do you bring to the collaborative process?{{/if}}
                                 </div>
                                 <div>
-                                    <textarea class="w-full border border-black p-1" rows="10" id="essay_text_0" oninput="update_word_count(0)"></textarea>
+                                    <textarea class="w-full border border-black p-1" rows="10" id="essay_text_0" oninput="update_word_count(0)">{{#if (if_uva collegeInfo.name)}}My favorite word is uhh im not sure yet{{/if}}{{#if (if_cornell collegeInfo.name)}}i like collaboration{{/if}}</textarea>
                                     <div class="w-full flex flex-row">
                                         <div class="w-1/2" id="word_count_0">
                                             Word Count: 0 words
@@ -327,5 +328,6 @@
                 document.getElementById(`word_count_${id}`).innerHTML = `Word Count: ${words} words`
             }
         }
+        update_word_count(0)
     </script>
 </html>
